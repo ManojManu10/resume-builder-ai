@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .flash-message.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        .profile-type {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        #profileType {
+            font-size: 16px;
+            padding: 10px;
+        }
+        .template-selection {
+            margin-top: 20px;
+        }
+        .template-option {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .template-option:hover {
+            background-color: #f5f5f5;
+        }
+        .prefill-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .prefill-section button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .prefill-section button:hover {
+            background-color: #218838;
+        }
+        
+        #prefillFields {
+            margin-top: 10px;
+        }
+        
+        #prefillFields label {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ATS-Friendly Resume Generator</h1>
+        
+        <div class="prefill-section">
+            <button type="button" onclick="togglePrefill()" id="prefillBtn">Enable Sample Data</button>
+            <div id="prefillFields" style="display: none;">
+                <label>
+                    <input type="radio" name="profile_type" value="fresher" onchange="loadSampleData('fresher')" checked> Fresher Sample
+                </label>
+                <label>
+                    <input type="radio" name="profile_type" value="experienced" onchange="loadSampleData('experienced')"> Experienced Sample
+                </label>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/">
+            <div class="form-group profile-type">
+                <label>Select Your Profile:</label>
+                <select id="profileType" name="profile_type" onchange="toggleFields()">
+                    <option value="fresher">Student/Fresher</option>
+                    <option value="experienced">Experienced Professional</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required value="{{ sample_data.name if sample_data else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required value="{{ sample_data.email if sample_data else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required value="{{ sample_data.phone if sample_data else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Profile (Optional):</label>
+                <input type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/yourprofile" value="{{ sample_data.linkedin if sample_data else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label>Select Resume Template:</label>
+                <div class="template-selection">
+                    <div class="template-option" onclick="selectTemplate(1)">
+                        <h3>Classic ATS</h3>
+                        <p>Traditional, clean format</p>
+                        <input type="radio" name="template" value="1" required>
+                    </div>
+                    <div class="template-option" onclick="selectTemplate(2)">
+                        <h3>Modern ATS</h3>
+                        <p>Contemporary, professional layout</p>
+                        <input type="radio" name="template" value="2">
+                    </div>
+                    <div class="template-option" onclick="selectTemplate(3)">
+                        <h3>Fresher ATS</h3>
+                        <p>Perfect for students & freshers</p>
+                        <input type="radio" name="template" value="3">
+                    </div>
+                </div>
+            </div>
+
+            <div id="fresherFields">
+                <div class="form-group">
+                    <label for="objective">Career Objective:</label>
+                    <textarea id="objective" name="objective">{{ sample_data.objective if sample_data and sample_data.get('objective') else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="education">Education:</label>
+                    <textarea id="education" name="education">{{ sample_data.education if sample_data and sample_data.get('education') else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="projects">Academic Projects:</label>
+                    <textarea id="projects" name="projects">{{ sample_data.projects if sample_data and sample_data.get('projects') else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="internships">Internships (Optional):</label>
+                    <textarea id="internships" name="internships">{{ sample_data.internships if sample_data and sample_data.get('internships') else '' }}</textarea>
+                </div>
+            </div>
+
+            <div id="experiencedFields" style="display: none;">
+                <div class="form-group">
+                    <label for="experience">Professional Experience:</label>
+                    <textarea id="experience" name="experience">{{ sample_data.experience if sample_data and sample_data.get('experience') else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="education_exp">Education:</label>
+                    <textarea id="education_exp" name="education_exp">{{ sample_data.education_exp if sample_data and sample_data.get('education_exp') else '' }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Technical Skills:</label>
+                <textarea id="skills" name="skills" required>{{ sample_data.skills if sample_data else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="certifications">Certifications (Optional):</label>
+                <textarea id="certifications" name="certifications">{{ sample_data.certifications if sample_data and sample_data.get('certifications') else '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="achievements">Achievements:</label>
+                <textarea id="achievements" name="achievements">{{ sample_data.achievements if sample_data and sample_data.get('achievements') else '' }}</textarea>
+            </div>
+
+            <button type="submit">Generate ATS-Friendly Resume</button>
+        </form>
+    </div>
+
+    <script>
+        let prefillEnabled = false;
+
+        function togglePrefill() {
+            const prefillFields = document.getElementById('prefillFields');
+            const prefillBtn = document.getElementById('prefillBtn');
+            const templateSelection = document.querySelector('.template-selection').parentElement;
+            
+            prefillEnabled = !prefillEnabled;
+            
+            if (prefillEnabled) {
+                prefillFields.style.display = 'block';
+                prefillBtn.textContent = 'Disable Sample Data';
+                prefillBtn.style.backgroundColor = '#dc3545';
+                templateSelection.style.display = 'block';
+                loadSampleData(document.querySelector('input[name="profile_type"]:checked').value);
+            } else {
+                prefillFields.style.display = 'none';
+                prefillBtn.textContent = 'Enable Sample Data';
+                prefillBtn.style.backgroundColor = '#28a745';
+                templateSelection.style.display = 'none';
+                clearForm();
+            }
+        }
+
+        function loadSampleData(profileType) {
+            if (!prefillEnabled) return;
+            
+            fetch(`/?profile_type=${profileType}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Update all form fields with sample data
+                    const formFields = ['name', 'email', 'phone', 'linkedin', 'skills', 'certifications', 'achievements'];
+                    formFields.forEach(field => {
+                        const element = document.getElementById(field);
+                        const sampleValue = doc.getElementById(field)?.value || '';
+                        if (element) element.value = sampleValue;
+                    });
+                    
+                    // Update profile specific fields
+                    if (profileType === 'fresher') {
+                        ['objective', 'education', 'projects', 'internships'].forEach(field => {
+                            const element = document.getElementById(field);
+                            const sampleValue = doc.getElementById(field)?.value || '';
+                            if (element) element.value = sampleValue;
+                        });
+                        toggleFields('fresher');
+                    } else {
+                        ['experience', 'education_exp'].forEach(field => {
+                            const element = document.getElementById(field);
+                            const sampleValue = doc.getElementById(field)?.value || '';
+                            if (element) element.value = sampleValue;
+                        });
+                        toggleFields('experienced');
+                    }
+                });
+        }
+
+        function clearForm() {
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input:not([type="radio"]), textarea');
+            inputs.forEach(input => input.value = '');
+        }
+
+        function toggleFields(profileType) {
+            const fresherFields = document.getElementById('fresherFields');
+            const experiencedFields = document.getElementById('experiencedFields');
+            
+            if (profileType === 'fresher') {
+                fresherFields.style.display = 'block';
+                experiencedFields.style.display = 'none';
+            } else {
+                fresherFields.style.display = 'none';
+                experiencedFields.style.display = 'block';
+            }
+        }
+
+        function selectTemplate(templateId) {
+            const templateOptions = document.querySelectorAll('.template-option');
+            templateOptions.forEach(option => {
+                option.style.backgroundColor = '';
+            });
+            const selectedOption = document.querySelector(`.template-option:nth-child(${templateId})`);
+            selectedOption.style.backgroundColor = '#f5f5f5';
+            document.querySelector(`input[value="${templateId}"]`).checked = true;
+        }
+
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleFields('fresher');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 40px;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+}
+
+textarea, input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.resume-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: left;
+    max-width: 600px;
+    margin: auto;
+}
+

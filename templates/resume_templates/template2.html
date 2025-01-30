@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Smith - Resume</title>
+    <style>
+        body {
+            font-family: sans-serif; /* Choose a professional font */
+            margin: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px; /* Adjust as needed */
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column; /* Ensures header is always at the top */
+            min-height: 100vh; /* Ensures footer sticks to the bottom */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-around; /* Distribute items evenly */
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content p {
+            margin: 0; /* Remove default p tag margins */
+        }
+
+        .main-content {
+            display: flex;
+            flex-grow: 1; /* Allows content to expand and push footer down */
+        }
+
+        .content-left {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .content-right {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .job-entry, .education-entry {
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            color: #777;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        /* Add more specific styles as needed */
+        
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .print-button:hover {
+            background: #2980b9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                background-color: white;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Michael Smith</h1>
+            <div class="header-info">
+                <p>Industrial Engineer | Advanced Computing | Sensors and Communications Technologies</p>
+            </div>
+            <div class="header-content">
+                <p>+1-541-754-3010 | help@enhanov.com | linkedin.com</p>
+                <p>Los Angeles, CA</p>
+            </div>
+        </header>
+
+        <section class="main-content">
+            <div class="content-left">
+                <section id="summary">
+                    <h2>SUMMARY</h2>
+                    <p>With over 10 years of experience as an Industrial Engineer, I have a proven track record in developing efficient manufacturing processes, implementing LEAN principles, and leading successful projects. My technical skills include CAD, automation software development, and process modeling. One of my biggest achievements was the development of an automated assembly process that reduced assembly time by 25%, leading to significant savings.</p>
+                </section>
+
+                <section id="experience">
+                    <h2>EXPERIENCE</h2>
+                    <div class="job-entry">
+                        <h3>Industrial Engineer</h3>
+                        <p>Lockheed Martin | 2019-2023 | Los Angeles, CA</p>
+                        <ul>
+                            <li>Led a team of engineers in the development and implementation of new manufacturing processes.</li>
+                            <li>Implemented a new automated assembly process, reducing assembly time by 25% and saving $100,000 annually.</li>
+                            <li>Led a project to redesign the factory layout, improving workflow and increasing productivity by 15%.</li>
+                            <li>Developed a new scheduling system, reducing project completion times by 10%.</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-entry">
+                        <h3>Manufacturing Engineer</h3>
+                        <p>Northrop Grumman | 2016-2019 | Los Angeles, CA</p>
+                        <ul>
+                            <li>Worked on the design and implementation of manufacturing processes for aerospace components.</li>
+                            <li>Designed and implemented a new quality control system, reducing defects by 20%.</li>
+                            <li>Managed a project to upgrade manufacturing equipment, increasing production capacity by 30%.</li>
+                            <li>Implemented Lean Manufacturing principles, reducing waste by 15% and saving $50,000 annually.</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-entry">
+                        <h3>Process Engineer</h3>
+                        <p>Raytheon Technologies | 2013-2015 | Los Angeles, CA</p>
+                        <ul>
+                            <li>Worked on the development and optimization of manufacturing processes for defense systems.</li>
+                            <li>Developed a new process for the assembly of electronic components, reducing assembly time by 20%.</li>
+                            <li>Implemented a new inventory management system, reducing stockouts by 30%.</li>
+                            <li>Led a project to upgrade manufacturing equipment, increasing production capacity by 25%.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="education">
+                    <h2>EDUCATION</h2>
+                    <div class="education-entry">
+                        <h3>Master of Science in Industrial Engineering</h3>
+                        <p>University of Southern California | 2011-2013 | Los Angeles, CA</p>
+                    </div>
+                    <div class="education-entry">
+                        <h3>Master of Science in Chemistry</h3>
+                        <p>University of Michigan | 2007-2011 | Michigan</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="content-right">
+                <section id="skills">
+                    <h2>SKILLS</h2>
+                    <ul>
+                        <li>LEAN Manufacturing</li>
+                        <li>Root Cause Analysis</li>
+                        <li>Project Scheduling</li>
+                        <li>Process Modeling</li>
+                        <li>Design of Experiments</li>
+                        <li>CAD (Creo, SolidWorks, NX, Catia)</li>
+                        <li>Automation Software Development</li>
+                        <li>LabVIEW</li>
+                        <li>MATLAB</li>
+                        <li>C++</li>
+                        <li>Precision Alignment Systems</li>
+                    </ul>
+                </section>
+
+                <section id="strengths">
+                    <h2>STRENGTHS</h2>
+                    <ul>
+                        <li>
+                            <h3>Problem Solving</h3>
+                            <p>Successfully led a team to identify and rectify bottlenecks in production line, increasing efficiency by 20%.</p>
+                        </li>
+                        <li>
+                            <h3>Project Management</h3>
+                            <p>Managed a team of 10 engineers to complete a major project 2 weeks ahead of schedule, saving $50,000 in resources.</p>
+                        </li>
+                        <li>
+                            <h3>Innovation</h3>
+                            <p>Developed a new automated process that reduced assembly time by 30%, leading to a significant increase in production.</p>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="achievements">
+                    <h2>ACHIEVEMENTS</h2>
+                    <ul>
+                        <li>
+                            <h3>Automated Assembly Process</h3>
+                            <p>Developed a new automated assembly process that reduced assembly time by 25%, leading to significant cost savings.</p>
+                        </li>
+                        <li>
+                            <h3>Factory Layout Redesign</h3>
+                            <p>Led a project to redesign the factory layout, improving workflow and increasing productivity by 15%.</p>
+                        </li>
+                        <li>
+                            <h3>Quality Control System</h3>
+                            <p>Designed and implemented a new quality control system, reducing defects by 20% and improving product quality.</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+    </div>
+    
+    <button onclick="window.print()" class="print-button">Print Resume</button>
+</body>
+</html>

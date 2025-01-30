@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hana Kim - Resume</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .main-content {
+            display: flex;
+            position: relative; /* For vertical line */
+        }
+
+        .main-content::before { /* Vertical line */
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 25%; /* Adjust as needed */
+            width: 1px;
+            background-color: #ccc;
+        }
+
+        .content-left {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .content-right {
+            flex: 2;
+            padding-left: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .job-entry, .education-entry, .course-entry {
+            margin-bottom: 15px;
+        }
+
+        #skills li {
+            font-weight: bold;
+        }
+
+        #experience ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        /* Add more specific styles as needed */
+
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #45a049;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>Hana Kim</h1>
+                <h2>Senior Software Engineer (40 years old)</h2>
+                <div class="contact-info">
+                    <p>12345, 123 Main Street, New York, United States</p>
+                    <p>United States, Driving license #D42158S20</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <p>+1 555 123 45 67</p>
+                <p>richard_feynman@email.com</p>
+            </div>
+        </header>
+
+        <section class="main-content">
+            <div class="content-left">
+                <section id="skills">
+                    <h2>Skills</h2>
+                    <ul>
+                        <li>React (Expert)</li>
+                        <li>UX/UI (Skillful)</li>
+                        <li>Python (Expert)</li>
+                    </ul>
+                </section>
+
+                <section id="languages">
+                    <h2>Languages</h2>
+                    <ul>
+                        <li>English (Native)</li>
+                        <li>Spanish (Proficient, B1-B2)</li>
+                    </ul>
+                </section>
+
+                <section id="links">
+                    <h2>Links</h2>
+                    <ul>
+                        <li>My GitHub Profile</li>
+                        <li>My LinkedIn Profile</li>
+                    </ul>
+                </section>
+
+                <section id="hobbies">
+                    <h2>Hobbies</h2>
+                    <ul>
+                        <li>Photography</li>
+                        <li>Hiking</li>
+                        <li>Traveling</li>
+                        <li>Web design</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="content-right">
+                <section id="summary">
+                    <h2>Summary</h2>
+                    <p>Experienced Frontend Software Developer with 5+ years of experience in creating user-centric, responsive web applications. Proficient in JavaScript, HTML, CSS, and modern frontend frameworks. Proven track record of improving website performance by 20% and reducing codebase by 15% in past projects.</p>
+                </section>
+
+                <section id="experience">
+                    <h2>Employment history</h2>
+                    <div class="job-entry">
+                        <h3>Senior Frontend Developer</h3>
+                        <p>ABC Company | San Francisco, CA | June 2019 - Present</p>
+                        <ul>
+                            <li>Designed and implemented responsive web applications using React, Redux, and Webpack.</li>
+                            <li>Collaborated with UX/UI designers to create pixel-perfect user interfaces.</li>
+                            <li>Optimized web performance and decreased page load time by 25%.</li>
+                            <li>Mentored junior developers and conducted code reviews.</li>
+                        </ul>
+                    </div>
+                    <div class="job-entry">
+                        <h3>Frontend Developer</h3>
+                        <p>XYZ Company | San Francisco, CA | January 2016 - May 2019</p>
+                        <ul>
+                            <li>Developed responsive, cross-browser compatible web applications using AngularJS and Bootstrap.</li>
+                            <li>Worked closely with backend developers to integrate RESTful APIs.</li>
+                            <li>Implemented unit and integration tests using Jest and Enzyme.</li>
+                            <li>Reduced codebase by 15% through refactoring and implementing design patterns.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="education">
+                    <h2>Education</h2>
+                    <div class="education-entry">
+                        <h3>Bachelor of Science in Computer Science</h3>
+                        <p>University of California, Berkeley | August 2012 - May 2016, Berkeley, CA</p>
+                    </div>
+                </section>
+
+                <section id="courses">
+                    <h2>Courses</h2>
+                    <div class="course-entry">
+                        <p>Advanced JavaScript Concepts part 2</p>
+                        <p>Udemy | January 2018 - March 2018</p>
+                    </div>
+                    <div class="course-entry">
+                        <p>React - The Complete Guide part 2</p>
+                        <p>Coursera | June 2017 - August 2017</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+    
+    <button onclick="window.print()" class="print-button">Print Resume</button>
+</body>
+</html>
